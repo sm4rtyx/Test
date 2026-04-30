@@ -25,14 +25,14 @@ func parsePackage(data string) (int, time.Duration, error) {
 	}
 	steps, err := strconv.Atoi(split[0])
 	if err != nil {
-		return 0, 0, err
+		return 0, 0, fmt.Errorf("Ошибка")
 	}
 	if steps <= 0 {
 		return 0, 0, fmt.Errorf("Ошибка")
 	}
 	duration, err := time.ParseDuration(strings.TrimSpace(split[1]))
 	if err != nil {
-		return 0, 0, err
+		return 0, 0, fmt.Errorf("Ошибка")
 	}
 	if duration <= 0 {
 		return 0, 0, fmt.Errorf("Ошибка")
