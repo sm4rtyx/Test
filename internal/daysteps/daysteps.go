@@ -22,7 +22,7 @@ func parsePackage(data string) (int, time.Duration, error) {
 	if len(split) != 2 {
 		return 0, 0, fmt.Errorf("Ошибка")
 	}
-	steps, err := strconv.Atoi(strings.TrimSpace(split[0]))
+	steps, err := strconv.Atoi(split[0])
 	if err != nil {
 		return 0, 0, err
 	}
@@ -32,6 +32,9 @@ func parsePackage(data string) (int, time.Duration, error) {
 	duration, err := time.ParseDuration(strings.TrimSpace(split[1]))
 	if err != nil {
 		return 0, 0, err
+	}
+	if duration <= 0 {
+		return 0, 0, fmt.Errorf("Ошибка")
 	}
 	return steps, duration, nil
 }
@@ -53,6 +56,6 @@ func DayActionInfo(data string, weight, height float64) string {
 	if err != nil {
 		return ""
 	}
-	return fmt.Sprintf("Количество шагов: %d.\nДистанция составила %.2f км.\nВы сожгли %.2f ккал.", steps, distanceInKm, cal)
+	return fmt.Sprintf("Количество шагов: %d.\nДистанция составила %.2f км.\nВы сожгли %.2f ккал.\n", steps, distanceInKm, cal)
 
 }
